@@ -10,6 +10,7 @@ const { Server } = require("socket.io");
 const crypto = require("crypto");
 
 const app = express();
+app.set('trust proxy', 1);
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: true, credentials: true } });
 
