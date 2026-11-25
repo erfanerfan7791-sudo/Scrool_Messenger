@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>اسکرول چت | Scroll Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="authView" class="auth-wrap">
+    <div class="auth-card">
+      <div class="brand-mark">S</div>
+      <h1>اسکرول چت</h1>
+      <p class="muted">ارتباط بدون مرز 💙</p>
+      <div class="tabs">
+        <button class="tab active" data-tab="login">ورود</button>
+        <button class="tab" data-tab="register">ساخت حساب</button>
+      </div>
+      <form id="authForm">
+        <label id="displayNameWrap" class="hidden">نام نمایشی<input id="displayName" maxlength="40" placeholder="مثلاً عرفان"></label>
+        <label>نام کاربری<input id="username" autocomplete="username" minlength="3" maxlength="24" placeholder="مثلاً erfan_01" required></label>
+        <label>رمز عبور<input id="password" type="password" autocomplete="current-password" minlength="8" placeholder="حداقل ۸ کاراکتر" required></label>
+        <button class="primary full" id="authSubmit">ورود به اسکرول چت</button>
+      </form>
+      <p id="authError" class="error"></p>
+      <small class="muted">با ساخت حساب، وارد فضای گفت‌وگوی اسکرول چت می‌شی.</small>
+    </div>
+  </div>
+
+  <main id="appView" class="app hidden">
+    <aside class="sidebar">
+      <div class="side-head">
+        <div class="brand-mini">S</div>
+        <div><strong>اسکرول چت</strong><small>Scroll Chat</small></div>
+        <button id="themeBtn" class="icon-btn" title="تغییر تم">☼</button>
+      </div>
+      <div class="me-card">
+        <div class="avatar" id="myAvatar">S</div>
+        <div class="me-info"><strong id="myName">کاربر</strong><small id="myUsername">@user</small></div>
+        <button id="logoutBtn" class="icon-btn" title="خروج">↪</button>
+      </div>
+      <div class="search-wrap"><span>⌕</span><input id="searchInput" placeholder="جست‌وجوی کاربر..."></div>
+      <div class="section-title"><span>گفت‌وگوها</span><button id="newGroupBtn" class="text-btn">＋ گروه</button></div>
+      <div id="chatList" class="chat-list">
+        <div class="empty-hint">برای شروع، یک کاربر را جست‌وجو کن.</div>
+      </div>
+      <div class="side-footer">ساخته‌شده با 💙 برای گفتگو</div>
+    </aside>
+
+    <section class="conversation">
+      <div id="welcome" class="welcome">
+        <div class="welcome-logo">S</div>
+        <h2>به اسکرول چت خوش اومدی!</h2>
+        <p>برای شروع، یک کاربر یا گروه رو از فهرست انتخاب کن.</p>
+      </div>
+      <div id="chatPanel" class="chat-panel hidden">
+        <header class="chat-head">
+          <button id="backBtn" class="icon-btn back-btn">→</button>
+          <div class="avatar" id="chatAvatar">C</div>
+          <div class="chat-title"><strong id="chatTitle">گفت‌وگو</strong><small id="chatSubtitle">اسکرول چت</small></div>
+          <button id="inviteBtn" class="icon-btn hidden" title="کپی کد دعوت">♧</button>
+        </header>
+        <div id="messages" class="messages">
+          <div class="empty-hint">هنوز پیامی وجود نداره. اولین پیام رو بفرست!</div>
+        </div>
+        <form id="messageForm" class="composer">
+          <label class="attach-btn" title="ارسال تصویر">＋<input id="imageInput" type="file" accept="image/*" hidden></label>
+          <input id="messageInput" autocomplete="off" placeholder="پیامت رو بنویس..." maxlength="4000">
+          <button class="send-btn" type="submit">➤</button>
+        </form>
+        <div class="composer-note">لطفاً اطلاعات حساس یا رمز عبورت رو در چت ارسال نکن.</div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="groupDialog">
+    <form method="dialog" class="dialog-close"><button class="icon-btn">✕</button></form>
+    <h3>ساخت گروه جدید</h3>
+    <p class="muted">یک نام برای گروه انتخاب کن.</p>
+    <form id="createGroupForm">
+      <input id="groupName" maxlength="50" placeholder="مثلاً رفقای اسکرول" required>
+      <button class="primary full">ساخت گروه</button>
+    </form>
+    <hr>
+    <h3>عضویت با کد دعوت</h3>
+    <form id="joinGroupForm">
+      <input id="inviteCodeInput" maxlength="16" placeholder="کد دعوت گروه" required>
+      <button class="secondary full">پیوستن به گروه</button>
+    </form>
+    <p id="groupError" class="error"></p>
+  </dialog>
+  <div id="toast" class="toast"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
